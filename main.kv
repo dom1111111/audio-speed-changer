@@ -1,0 +1,43 @@
+
+<MainWidget>:
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.width, root.height
+        BoxLayout:
+            orientation: 'vertical'
+            Label:
+                id: select_speed
+                text: "1. Select a File"
+            Button:
+                id: select_file
+                text: "Browse..."
+                on_release:
+                    app.root.choose_file()
+                    app.root.label_filename()
+                    app.root.check_execute_enable()
+            Label:
+                id: display_file_label
+                markup: True
+                text: "You have chosen..."
+        BoxLayout:
+            orientation: 'vertical'
+            Label:
+                text: "2. Enter a percetnage for change in speed"
+            BoxLayout:
+                orientation: 'horizontal'
+                TextInput:
+                    id: speed_percentage
+                    multiline: False
+                    input_filter: 'int'
+                    hint_text: "type here..."
+                    on_text:
+                        if len(self.text) > 3: self.do_cursor_movement('cursor_end'), self.do_backspace()
+                        app.root.check_execute_enable()
+                Label:
+                    text: "%"
+        Button:
+            id: execute_button
+            text: "Do the thing!"
+            background_color: kivy.utils.get_color_from_hex('#3FBF7F')
+            disabled: True
+            on_release: app.root.fuck_with_audio(app.root.show_list(), speed_percentage.text)
