@@ -46,7 +46,7 @@ class MainWidget(Widget):
             self.ids.execute_button.disabled = True
 
     # the main audio manipulating method
-    def fuck_with_audio(self, file_path, speed):
+    def change_audio(self, file_path, speed):
         original_audio = open(file_path)                    # open audio from file_path given
         params = original_audio.getparams()                 # "Returns a namedtuple() (nchannels, sampwidth, framerate, nframes, comptype, compname)"
         audio_data = original_audio.readframes(params[3])   # reads the frames (essentially the main data) of the audio file - index 3 of getparams is the number of frames, which is needed as argument for the readframes function
